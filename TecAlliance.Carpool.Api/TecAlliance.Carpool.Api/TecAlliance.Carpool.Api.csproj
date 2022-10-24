@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="TecAlliance.Carpool.Api\TecAlliance.Carpool.Api\.vs\ProjectEvaluation\tecalliance.carpool.api.metadata.v5.1" />
+    <None Include="TecAlliance.Carpool.Api\TecAlliance.Carpool.Api\.vs\ProjectEvaluation\tecalliance.carpool.api.projects.v5.1" />
+    <None Include="TecAlliance.Carpool.Api\TecAlliance.Carpool.Api\.vs\TecAlliance.Carpool.Api\config\applicationhost.config" />
+    <None Include="TecAlliance.Carpool.Api\TecAlliance.Carpool.Api\.vs\TecAlliance.Carpool.Api\DesignTimeBuild\.dtbcache.v2" />
+    <None Include="TecAlliance.Carpool.Api\TecAlliance.Carpool.Api\.vs\TecAlliance.Carpool.Api\FileContentIndex\2b6ae763-ec3e-4def-84b0-5ef0e7a8093b.vsidx" />
+    <None Include="TecAlliance.Carpool.Api\TecAlliance.Carpool.Api\.vs\TecAlliance.Carpool.Api\FileContentIndex\2e5341e7-7e78-4874-aafb-af096001d6f9.vsidx" />
+    <None Include="TecAlliance.Carpool.Api\TecAlliance.Carpool.Api\.vs\TecAlliance.Carpool.Api\FileContentIndex\34279abf-7833-4f4a-9191-9bc290fbf0bd.vsidx" />
+    <None Include="TecAlliance.Carpool.Api\TecAlliance.Carpool.Api\.vs\TecAlliance.Carpool.Api\FileContentIndex\7e61a4d0-e932-4a3e-ac92-59c92e9eca8a.vsidx" />
+    <None Include="TecAlliance.Carpool.Api\TecAlliance.Carpool.Api\.vs\TecAlliance.Carpool.Api\FileContentIndex\read.lock" />
+    <None Include="TecAlliance.Carpool.Api\TecAlliance.Carpool.Api\.vs\TecAlliance.Carpool.Api\v17\.futdcache.v2" />
+    <None Include="TecAlliance.Carpool.Api\TecAlliance.Carpool.Api\TecAlliance.Carpool.Api.sln" />
+    <None Include="TecAlliance.Carpool.Api\TecAlliance.Carpool.Api\TecAlliance.Carpool.Api\TecAlliance.Carpool.Api.csproj" />
+    <None Include="TecAlliance.Carpool.Api\TecAlliance.Carpool.Api\TecAlliance.Carpool.Api\TecAlliance.Carpool.Api.csproj.user" />
+    <None Include="TecAlliance.Carpool.Api\TecAlliance.Carpool.Api\TecAlliance.Carpool.Business\TecAlliance.Carpool.Business.csproj" />
+    <None Include="TecAlliance.Carpool.Api\TecAlliance.Carpool.Api\TecAlliance.Carpool.Data\TecAlliance.Carpool.Data.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="TecAlliance.Carpool.Api\TecAlliance.Carpool.Api\.vs\TecAlliance.Carpool.Api\FileContentIndex\merges\" />
+    <Folder Include="TecAlliance.Carpool.Api\TecAlliance.Carpool.Api\TecAlliance.Carpool.Api\obj\Debug\net6.0\staticwebassets\" />
+  </ItemGroup>
+
+</Project>
