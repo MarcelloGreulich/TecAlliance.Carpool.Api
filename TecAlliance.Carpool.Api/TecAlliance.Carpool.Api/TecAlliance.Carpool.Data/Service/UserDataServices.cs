@@ -1,15 +1,24 @@
-﻿using System.Text;
+﻿using System.Reflection;
+using System.Text;
 using TecAlliance.Carpool.Data.Models;
 
 namespace TecAlliance.Carpool.Data.Services
 {
     public class UserDataServices
     {
+        //Global
+        string? DirectoryPath;
+
+        public UserDataServices()
+        {
+            this.DirectoryPath = Path.GetDirectoryName(Assembly.GetAssembly(typeof(CarpoolDataServices)).Location);
+        }
+
         //Daten Schreiben und ausgeben 
         public List<User> SaveUser()
         {
             List<User> list = new List<User>();
-            string[] lines = File.ReadAllLines("C:\\010 Projects\\020 Fahrgemeinschaft\\UserList.csv");
+            string[] lines = File.ReadAllLines($"{DirectoryPath}\\Csv\\UserList.csv");
             foreach (string line in lines)
             {
                 User user = new User();
@@ -38,7 +47,7 @@ namespace TecAlliance.Carpool.Data.Services
         public void AddUser(User user)
         {
             //Create File Stream
-            FileStream fs = new FileStream("C:\\010 Projects\\020 Fahrgemeinschaft\\UserList.csv", FileMode.Append);
+            FileStream fs = new FileStream($"{DirectoryPath}\\Csv\\UserList.csv", FileMode.Append);
             //Convert user to string
             string userString = $"{user.Id};{user.Name};{user.Nachname};{user.Anmeldename};{user.Passwort};{user.Gender};{user.Alter}; \n";
             //Prepare user string for writing
@@ -59,7 +68,7 @@ namespace TecAlliance.Carpool.Data.Services
             else
             {
                 list.RemoveAt(user.Id);
-                FileStream fs = new FileStream("C:\\010 Projects\\020 Fahrgemeinschaft\\UserList.csv", FileMode.Create);
+                FileStream fs = new FileStream($"{DirectoryPath}\\Csv\\UserList.csv", FileMode.Create);
                 foreach (var l in list)
                 {
                     string userString = $"{l.Id};{l.Name};{l.Nachname};{l.Anmeldename};{l.Passwort};{l.Gender};{l.Alter}; \n";
@@ -73,7 +82,7 @@ namespace TecAlliance.Carpool.Data.Services
         }
         public void RemoveAllUser()
         { 
-            FileStream fs = new FileStream("C:\\010 Projects\\020 Fahrgemeinschaft\\UserList.csv", FileMode.Create);
+            FileStream fs = new FileStream($"{DirectoryPath}\\Csv\\UserList.csv", FileMode.Create);
             fs.Close();
             fs.Dispose();
         }
@@ -81,7 +90,7 @@ namespace TecAlliance.Carpool.Data.Services
         public User ReplaceUserById(int id,User user ,List<User> list)
         {
             list[id] = user;
-            FileStream fs = new FileStream("C:\\010 Projects\\020 Fahrgemeinschaft\\UserList.csv", FileMode.Create);
+            FileStream fs = new FileStream($"{DirectoryPath}\\Csv\\UserList.csv", FileMode.Create);
             //Convert user to string
             foreach (var listUser in list)
             {

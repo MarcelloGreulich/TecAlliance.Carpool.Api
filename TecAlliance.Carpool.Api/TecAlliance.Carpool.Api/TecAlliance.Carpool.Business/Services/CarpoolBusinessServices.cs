@@ -46,6 +46,7 @@ namespace TecAlliance.Carpool.Business.Services
             List<CarpoolModel> carpoolModelList = new List<CarpoolModel>();
             List<CarpoolModel> list = carpoolDataServices.SaveCarpools();
             CarpoolModel carpoolModel = ConvertToCarpoolModel(carpool);
+            carpoolModel.CarpoolId = carpoolDataServices.GetId();
             list.Add(carpoolModel);
             carpoolDataServices.PostCarpool(list);
         }
@@ -300,7 +301,7 @@ namespace TecAlliance.Carpool.Business.Services
         {
             List<UserInfo> carpoolUserInoDtoTempList = new List<UserInfo>();
             CarpoolModel carpoolModel = new CarpoolModel();
-            carpoolModel.CarpoolId = carpoolDataServices.GetId();
+            carpoolModel.CarpoolId = carpool.CarpoolId;
             carpoolModel.CarDesignation = carpool.CarDesignation;
             carpoolModel.FreeSeat = carpool.FreeSeat;
             carpoolModel.StartPoint = carpool.StartPoint;

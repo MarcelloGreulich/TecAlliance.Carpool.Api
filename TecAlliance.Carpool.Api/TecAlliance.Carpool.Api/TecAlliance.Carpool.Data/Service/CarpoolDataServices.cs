@@ -8,11 +8,11 @@ namespace TecAlliance.Carpool.Data.Services
     public class CarpoolDataServices
     {
         //Global
-        string path;
+        string? DirectoryPath;
 
         public CarpoolDataServices()
         {
-            //this.path = GetDirectoryName(Assembly.GetEntryAssembly().Location); ;
+            this.DirectoryPath = Path.GetDirectoryName(Assembly.GetAssembly(typeof(CarpoolDataServices)).Location);
         }
 
 
@@ -48,7 +48,7 @@ namespace TecAlliance.Carpool.Data.Services
         {
             List<CarpoolModel> list = new List<CarpoolModel>();
             int id = 0;
-            string[] lines = File.ReadAllLines("C:\\010 Projects\\020 Fahrgemeinschaft\\Carpools\\Carpools.csv");
+            string[] lines = File.ReadAllLines($"{DirectoryPath}\\Csv\\Carpools.csv");
             foreach (string line in lines)
             {
                 CarpoolModel carpool = new CarpoolModel();
@@ -98,7 +98,7 @@ namespace TecAlliance.Carpool.Data.Services
         public void PostCarpool(List<CarpoolModel> carpoolList)
         {
             //Create File Stream
-            FileStream fs = new FileStream("C:\\010 Projects\\020 Fahrgemeinschaft\\Carpools\\Carpools.csv", FileMode.Create);
+            FileStream fs = new FileStream($"{DirectoryPath}\\Csv\\Carpools.csv", FileMode.Create);
             foreach (var carpool in carpoolList)
             {
                 string userString = $"{carpool.CarpoolId};{carpool.CarDesignation};{carpool.FreeSeat};{carpool.StartPoint};{carpool.EndPoint};{carpool.DepartureTime};{carpool.Drivers.Id};";
@@ -127,7 +127,7 @@ namespace TecAlliance.Carpool.Data.Services
         /// </summary>
         public void DeleteAllCarpools()
         {
-            FileStream fs = new FileStream("C:\\010 Projects\\020 Fahrgemeinschaft\\Carpools\\Carpools.csv", FileMode.Create);
+            FileStream fs = new FileStream($"{DirectoryPath}\\Csv\\Carpools.csv", FileMode.Create);
             fs.Close();
             fs.Dispose();
         }
@@ -146,7 +146,7 @@ namespace TecAlliance.Carpool.Data.Services
             else
             {
                 list.RemoveAt(carpool.CarpoolId);
-                FileStream fs = new FileStream("C:\\010 Projects\\020 Fahrgemeinschaft\\Carpools\\Carpools.csv", FileMode.Create);
+                FileStream fs = new FileStream($"{DirectoryPath}\\Csv\\Carpools.csv", FileMode.Create);
                 byte[] buffer = null;
                 foreach (var l in list)
                 {
@@ -180,7 +180,7 @@ namespace TecAlliance.Carpool.Data.Services
         public CarpoolModel LeaveCarpool(CarpoolModel carpool, int userId)
         {
             List<CarpoolModel> list = SaveCarpools();
-            FileStream fs = new FileStream("C:\\010 Projects\\020 Fahrgemeinschaft\\Carpools\\Carpools.csv", FileMode.Create);
+            FileStream fs = new FileStream(@$"{DirectoryPath}\Carpools.csv", FileMode.Create);
             CarpoolModel model = new CarpoolModel();
             foreach (var l in list)
             {

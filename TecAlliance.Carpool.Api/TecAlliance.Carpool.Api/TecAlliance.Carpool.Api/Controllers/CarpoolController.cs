@@ -30,26 +30,13 @@ namespace TecAlliance.Carpool.Api.Controllers
         /// <param name="isDriver"></param>
         /// <returns>A newly created Carpooldto</returns>
         /// <remarks>
-        /// Sample request:
-        ///  POST /Carpool
-        ///     {
-        ///        		"carpoolId": 0,
-        ///             "carDesignation": "BMW",
-        ///             "freeSeat": 4,
-        ///             "startPoint": "Schweinberg",
-        ///             "endPoint": "Weikersheim",
-        ///             "depatureTime": "2022-10-24T11:48:38.704Z"
-        ///     }
-        ///
         /// </remarks>
         ///  <response code="201">Returns the newly created item</response>
         /// <response code="400">If the item is null</response>
-        [HttpPost]
-        //       public ActionResult<CarpoolDto> PostCarpool(int userid, bool isDriver, CarpoolDto carpool)
-        public ActionResult<CarpoolDto> PostCarpool(CarpoolDto carpool)
-
+        [HttpPost("{userid}")]
+        public ActionResult<CarpoolDto> PostCarpool(int userid, bool isDriver, CarpoolDto carpool)
         {
-            carpoolBusinessServices.PostCarpool(0, carpool, false);
+            carpoolBusinessServices.PostCarpool(userid, carpool, isDriver);
             return Created($"api/Carpool/{carpool.CarpoolId}", carpool); ;
         }
         [HttpPost("another")]
