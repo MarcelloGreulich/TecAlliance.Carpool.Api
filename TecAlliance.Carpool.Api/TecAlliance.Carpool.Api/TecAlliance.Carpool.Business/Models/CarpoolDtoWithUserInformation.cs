@@ -23,9 +23,9 @@ namespace TecAlliance.Carpool.Business.Models
         public DateTime DepartureTime { get; set; }
 
         //Contains the Driver of the Carpool    
-        public UserInoDto Drivers { get; set; }
+        public UserInfoDto Drivers { get; set; }
         //Contains a list of Pessangers
-        public List<UserInoDto> Passengers { get; set; }
+        public List<UserInfoDto> Passengers { get; set; }
 
     }
 }

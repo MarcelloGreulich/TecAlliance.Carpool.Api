@@ -1,5 +1,5 @@
 ﻿using TecAlliance.Carpool.Business.Models;
-using TecAlliance.Carpool.Data.Models;
+using TecAlliance.Carpool.Data.Model;
 using TecAlliance.Carpool.Data.Services;
 
 namespace TecAlliance.Carpool.Business.Services

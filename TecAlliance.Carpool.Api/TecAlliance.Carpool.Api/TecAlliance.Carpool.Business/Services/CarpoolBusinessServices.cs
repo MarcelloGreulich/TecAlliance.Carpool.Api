@@ -1,6 +1,5 @@
 ﻿using TecAlliance.Carpool.Business.Models;
 using TecAlliance.Carpool.Data.Model;
-using TecAlliance.Carpool.Data.Models;
 using TecAlliance.Carpool.Data.Services;
 
 namespace TecAlliance.Carpool.Business.Services
@@ -29,7 +28,7 @@ namespace TecAlliance.Carpool.Business.Services
         public void PostCarpool(int id, CarpoolDto carpoolDto, bool isDriver)
         {
             UserDto userDto = userBusinessServices.GetUserdtoById(id);
-            UserInoDto userInfoDto = ConvertIntoUserInfoDto(userDto, isDriver);
+            UserInfoDto userInfoDto = ConvertIntoUserInfoDto(userDto, isDriver);
             List<CarpoolModel> carpool = CreateCarpool(carpoolDto, userInfoDto);
             carpoolDataServices.PostCarpool(carpool);
         }
@@ -57,9 +56,9 @@ namespace TecAlliance.Carpool.Business.Services
         /// <param name="userDto"></param>
         /// <param name="idDriver"></param>
         /// <returns>userInodto</returns>
-        public UserInoDto ConvertIntoUserInfoDto(UserDto userDto, bool idDriver)
+        public UserInfoDto ConvertIntoUserInfoDto(UserDto userDto, bool idDriver)
         {
-            UserInoDto userInoDto = new UserInoDto();
+            UserInfoDto userInoDto = new UserInfoDto();
             userInoDto.Id = userDto.Id;
             userInoDto.Name = userDto.Name;
             userInoDto.IsDriver = idDriver;
@@ -71,7 +70,7 @@ namespace TecAlliance.Carpool.Business.Services
         /// </summary>
         /// <param name="userDto"></param>
         /// <returns>userIndo</returns>
-        public UserInfo ConvertIntoUserInfo(UserInoDto userDto)
+        public UserInfo ConvertIntoUserInfo(UserInfoDto userDto)
         {
             UserInfo userInoDto = new UserInfo();
             userInoDto.Id = userDto.Id;
@@ -90,7 +89,7 @@ namespace TecAlliance.Carpool.Business.Services
         /// <param name="carpoolDto"></param>
         /// <param name="userDto"></param>
         /// <returns>list of CarpoolModels</returns>
-        public List<CarpoolModel> CreateCarpool(CarpoolDto carpoolDto, UserInoDto userDto)
+        public List<CarpoolModel> CreateCarpool(CarpoolDto carpoolDto, UserInfoDto userDto)
         {
             List<CarpoolModel> carpoollList = new List<CarpoolModel>();
             if (userDto.IsDriver)
@@ -139,7 +138,7 @@ namespace TecAlliance.Carpool.Business.Services
         /// <param name="userDto"></param>
         /// <param name="carpool"></param>
         /// <returns>Carpoolmodel</returns>
-        public CarpoolModel convertAllInfo(CarpoolDto carpoolDto, UserInoDto userDto, CarpoolModel carpool)
+        public CarpoolModel convertAllInfo(CarpoolDto carpoolDto, UserInfoDto userDto, CarpoolModel carpool)
         {
             carpool.CarDesignation = carpoolDto.CarDesignation;
             carpool.FreeSeat = carpoolDto.FreeSeat;
@@ -184,9 +183,9 @@ namespace TecAlliance.Carpool.Business.Services
         /// </summary>
         /// <param name="userDto"></param>
         /// <returns></returns>
-        public UserInoDto ConvertIntoUserInfoDtoDrivcer(UserInfo userDto)
+        public UserInfoDto ConvertIntoUserInfoDtoDrivcer(UserInfo userDto)
         {
-            UserInoDto userInoDto = new UserInoDto();
+            UserInfoDto userInoDto = new UserInfoDto();
             userInoDto.Id = userDto.Id;
             userInoDto.Name = userDto.Name;
             userInoDto.IsDriver = userDto.IsDriver;
@@ -203,8 +202,8 @@ namespace TecAlliance.Carpool.Business.Services
             foreach (var carpool in carpools)
             {
                 CarpoolDtoWithUserInformation carpoolDtoWithUserInformation = new CarpoolDtoWithUserInformation();
-                UserInoDto driver = new UserInoDto();
-                List<UserInoDto> carpoolUserInoDtoTempList = new List<UserInoDto>();
+                UserInfoDto driver = new UserInfoDto();
+                List<UserInfoDto> carpoolUserInoDtoTempList = new List<UserInfoDto>();
                 carpoolDtoWithUserInformation.CarpoolId = carpool.CarpoolId;
                 carpoolDtoWithUserInformation.CarDesignation = carpool.CarDesignation;
                 carpoolDtoWithUserInformation.FreeSeat = carpool.FreeSeat;
@@ -221,7 +220,7 @@ namespace TecAlliance.Carpool.Business.Services
                 {
                     foreach (var item in carpool.Passengers)
                     {
-                        UserInoDto user = new UserInoDto();
+                        UserInfoDto user = new UserInfoDto();
                         user.Id = item.Id;
                         UserDto userDto = new UserDto();
                         userDto = userBusinessServices.GetUserdtoById(user.Id);
@@ -252,8 +251,8 @@ namespace TecAlliance.Carpool.Business.Services
             {
                 if (carpool.CarpoolId == id)
                 {
-                    UserInoDto driver = new UserInoDto();
-                    List<UserInoDto> carpoolUserInoDtoTempList = new List<UserInoDto>();
+                    UserInfoDto driver = new UserInfoDto();
+                    List<UserInfoDto> carpoolUserInoDtoTempList = new List<UserInfoDto>();
                     carpoolDtoWithUserInformation.CarpoolId = carpool.CarpoolId;
                     carpoolDtoWithUserInformation.CarDesignation = carpool.CarDesignation;
                     carpoolDtoWithUserInformation.FreeSeat = carpool.FreeSeat;
@@ -270,7 +269,7 @@ namespace TecAlliance.Carpool.Business.Services
                     {
                         foreach (var item in carpool.Passengers)
                         {
-                            UserInoDto user = new UserInoDto();
+                            UserInfoDto user = new UserInfoDto();
                             user.Id = item.Id;
                             UserDto userDto = new UserDto();
                             userDto = userBusinessServices.GetUserdtoById(user.Id);
@@ -349,10 +348,12 @@ namespace TecAlliance.Carpool.Business.Services
         /// <param name="carpoolId"></param>
         /// <param name="userId"></param>
         /// <returns></returns>
-        public CarpoolModel LeaveCarpool(int carpoolId, int userId)
+        public CarpoolDtoWithUserInformation LeaveCarpool(int carpoolId, int userId)
         {
+            CarpoolDtoWithUserInformation pool = GetCarpoolById(carpoolId);
             CarpoolModel carpool = ConvertToCarpoolModel(GetCarpoolById(carpoolId));
-            return carpoolDataServices.LeaveCarpool(carpool, userId);
+            carpoolDataServices.LeaveCarpool(carpool, userId);
+            return pool;
         }
     }
 }

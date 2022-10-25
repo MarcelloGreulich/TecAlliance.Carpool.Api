@@ -19,7 +19,7 @@ namespace TecAlliance.Carpool.Business.Sample_Data
                 FreeSeat = 5,
                 StartPoint = "Schweinberg",
                 EndPoint = "Weikersheim",
-                DepartureTime = System.DateTime.Now,
+                DepartureTime = DateTime.Now,
             };  
         }
     }
